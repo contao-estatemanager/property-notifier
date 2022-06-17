@@ -1,6 +1,6 @@
 <?php
 
-namespace ContaoEstateManager\PropertyNotifier;
+namespace ContaoEstateManager\PropertyNotifier\EstateManager;
 
 use Contao\Config;
 use Contao\Environment;
