@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    ContaoEstateManager\PropertyNotifier\:
+        resource: '../../'
+        exclude: '../../{Model,DependencyInjection,Resources,Form}'

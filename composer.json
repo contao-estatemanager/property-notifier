@@ -15,6 +15,8 @@
   "require":{
     "php":"^7.4 || ^8.0",
     "contao/core-bundle":"^4.13",
+    "rlanvin/php-rrule":"^v2.3",
+    "codefog/contao-haste":"^4.25",
     "contao-estatemanager/core": "^1.1"
   },
   "require-dev": {

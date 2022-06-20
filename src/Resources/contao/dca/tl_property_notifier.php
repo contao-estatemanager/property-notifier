@@ -93,6 +93,10 @@ $GLOBALS['TL_DCA']['tl_property_notifier'] = array
         (
             'sql'                     => "blob NULL"
         ),
+        'notify' => array
+        (
+            'sql'                     => "char(1) NOT NULL default '1'"
+        ),
         'interval' => array
         (
             'sql'                     => "int(10) unsigned NOT NULL default '0'"

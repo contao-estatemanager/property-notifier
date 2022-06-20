@@ -37,4 +37,18 @@ class PropertyNotifierModel extends Model
      * @var string
      */
     protected static $strTable = 'tl_property_notifier';
+
+    /**
+     * Find all published notifier rows by their IDs and sort them if no order is given
+     */
+    public static function isOwnerOfRecord($member, $record): bool
+    {
+        // Check if the record belongs to the member
+        if($member ?? null && (($member->id === $record->member) || ($record->email && ($member->email === $record->email))))
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
