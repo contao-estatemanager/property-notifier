@@ -67,7 +67,7 @@ $GLOBALS['TL_DCA']['tl_property_notifier'] = array
     // Palettes
     'palettes' => array
     (
-        'default'                     => '{title_legend},title,alias,jumpTo;{config_legend},groups,submitOnChange;{toggle_filter_legend},toggleFilter,roomOptions;{template_legend:hide},customTpl;{expert_legend:hide},attributes,novalidate'
+        'default'                     => '{title_legend},email;'
     ),
 
     // Fields
@@ -93,13 +93,13 @@ $GLOBALS['TL_DCA']['tl_property_notifier'] = array
         (
             'sql'                     => "blob NULL"
         ),
-        'notify' => array
-        (
-            'sql'                     => "char(1) NOT NULL default '1'"
-        ),
         'interval' => array
         (
-            'sql'                     => "int(10) unsigned NOT NULL default '0'"
+            'sql'                     => "varchar(255) NOT NULL default ''"
+        ),
+        'hash' => array
+        (
+            'sql'                     => "varchar(255) NOT NULL default ''"
         ),
         'sentOn' => array
         (

@@ -2,6 +2,12 @@
 
 <?php $this->block('content'); ?>
 
+<?php if($this->message): ?>
+    <p class="tl_confirm"><?=$this->message?></p>
+<?php endif; ?>
+
+<p><?=$this->description?></p>
+
 <?=$this->form?>
 
 <?php $this->endblock(); ?>

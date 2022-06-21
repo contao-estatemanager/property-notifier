@@ -1,0 +1,48 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_property_notifier.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_property_notifier.createIntervalLegend">
+        <source>Notification by e-mail</source>
+        <target>Benachrichtigung per E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tl_property_notifier.createSaveLabel">
+        <source>Save search</source>
+        <target>Suche speichern</target>
+      </trans-unit>
+
+      <trans-unit id="tl_property_notifier.intervalLabel">
+        <source>Notifications</source>
+        <target>Benachrichtigungen</target>
+      </trans-unit>
+      <trans-unit id="tl_property_notifier.createdAtLabel">
+        <source>Created at</source>
+        <target>Erstellt am</target>
+      </trans-unit>
+      <trans-unit id="tl_property_notifier.editLabel">
+        <source>Edit search</source>
+        <target>Suche bearbeiten</target>
+      </trans-unit>
+      <trans-unit id="tl_property_notifier.deleteLabel">
+        <source>Delete search</source>
+        <target>Suche löschen</target>
+      </trans-unit>
+
+      <trans-unit id="tl_property_notifier.HOURLY">
+        <source>Hourly</source>
+        <target>Stündlich</target>
+      </trans-unit>
+      <trans-unit id="tl_property_notifier.THREE_TIMES_A_DAY">
+        <source>3x Daily</source>
+        <target>3x Täglich</target>
+      </trans-unit>
+      <trans-unit id="tl_property_notifier.DAILY">
+        <source>1x Daily</source>
+        <target>1x Täglich</target>
+      </trans-unit>
+      <trans-unit id="tl_property_notifier.NEVER">
+        <source>Never</source>
+        <target>Niemals</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

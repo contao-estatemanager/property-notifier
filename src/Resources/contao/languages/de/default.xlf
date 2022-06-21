@@ -1,0 +1,18 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="ERR.property_notifier_create">
+        <source>You have already saved a search with these parameters</source>
+        <target>Sie haben bereits eine Suche mit diesen Parametern gespeichert</target>
+      </trans-unit>
+      <trans-unit id="MSC.property_notifier_create">
+        <source>The search was saved successfully</source>
+        <target>Die Suche wurde erfolgreiche gespeichert</target>
+      </trans-unit>
+      <trans-unit id="MSC.property_notifier_edit">
+        <source>The search was successfully processed</source>
+        <target>Die Suche wurde erfolgreiche bearbeitet</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

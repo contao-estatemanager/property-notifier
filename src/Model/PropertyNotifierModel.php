@@ -11,12 +11,14 @@ use Contao\Model;
  * @property integer $tstamp
  * @property string  $email
  * @property string  $properties
+ * @property string  $hash
  * @property integer $member
  * @property integer $interval
  * @property integer $sentOn
  *
  * @method static PropertyNotifierModel|null findById($id, array $opt=array())
  * @method static PropertyNotifierModel|null findOneBy($col, $val, array $opt=array())
+ * @method static PropertyNotifierModel|null findOneByHash($col, $val, array $opt=array())
  * @method static PropertyNotifierModel|null findOneByTstamp($val, array $opt=array())
  *
  * @method static \Model\Collection|PropertyNotifierModel[]|PropertyNotifierModel|null findByTstamp($val, array $opt=array())
@@ -38,8 +40,38 @@ class PropertyNotifierModel extends Model
      */
     protected static $strTable = 'tl_property_notifier';
 
+    public static function findByMember($member, array $arrOptions = [])
+    {
+        if(null === $member)
+        {
+            return null;
+        }
+
+        $t = static::$strTable;
+
+        return static::findBy(
+            ["$t.member=? OR $t.email=?"],
+            [$member->id, $member->email],
+            $arrOptions
+        );
+    }
+
     /**
-     * Find all published notifier rows by their IDs and sort them if no order is given
+     * Find record by member and hash
+     */
+    public static function findByMemberAndHash($member, $hash, ?string $email = null, array $arrOptions = [])
+    {
+        $t = static::$strTable;
+
+        return static::findOneBy(
+            ["$t.hash=? AND ($t.member=? OR $t.email=?)"],
+            [$hash, $member->id ?? 0, $email ?? ($member->email ?? '')],
+            $arrOptions
+        );
+    }
+
+    /**
+     * Check if a member owned the record
      */
     public static function isOwnerOfRecord($member, $record): bool
     {

@@ -1,0 +1,27 @@
+<div class="notifier-item">
+    <div class="head">
+        <div class="interval">
+            <span class="label"><?= $this->intervalLabel ?></span>
+            <span class="value"><?= $this->humanReadableInterval ?></span>
+        </div>
+        <div class="createdAt">
+            <span class="label"><?= $this->createdAtLabel ?></span>
+            <span class="value"><?= $this->humanReadableDate ?></span>
+        </div>
+    </div>
+    <div class="content">
+        <?php foreach ($this->properties as $key => $property): ?>
+            <div class="<?=$key?>">
+                <span class="label"><?=$property['label']?></span>
+                <span class="value"><?=$property['value']?></span>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="footer">
+        <?php if($this->editLink): ?>
+            <a href="<?=$this->editLink?>"><?=$this->editLabel?></a>
+        <?php endif; ?>
+
+        <a href="#">!DELETE</a>
+    </div>
+</div>
