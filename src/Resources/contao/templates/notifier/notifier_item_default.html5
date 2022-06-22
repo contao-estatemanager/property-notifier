@@ -22,6 +22,6 @@
             <a href="<?=$this->editLink?>"><?=$this->editLabel?></a>
         <?php endif; ?>
 
-        <a href="#">!DELETE</a>
+        <a href="<?=$this->deleteLink?>" onclick="return confirm('<?=$this->deleteSafetyQuestion?>')"><?=$this->deleteLabel?></a>
     </div>
 </div>

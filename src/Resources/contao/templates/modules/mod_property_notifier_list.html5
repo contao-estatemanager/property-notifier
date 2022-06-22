@@ -2,6 +2,10 @@
 
 <?php $this->block('content'); ?>
 
+<?php if($this->message): ?>
+    <p class="tl_confirm"><?=$this->message?></p>
+<?php endif; ?>
+
 <?=implode("", $this->list) ?>
 
 <?php $this->endblock(); ?>

@@ -26,6 +26,10 @@
         <source>Delete search</source>
         <target>Suche löschen</target>
       </trans-unit>
+      <trans-unit id="tl_property_notifier.deleteSafetyQuestion">
+        <source>Do you really want to delete this search?</source>
+        <target>Möchten Sie diese Suche wirklich löschen?</target>
+      </trans-unit>
 
       <trans-unit id="tl_property_notifier.HOURLY">
         <source>Hourly</source>

@@ -13,6 +13,23 @@
         <source>The search was successfully processed</source>
         <target>Die Suche wurde erfolgreiche bearbeitet</target>
       </trans-unit>
+
+      <trans-unit id="MSC.property_notifier_list_empty">
+        <source>You have not saved any searches yet.</source>
+        <target>Sie haben noch keine Suchen gespeichert.</target>
+      </trans-unit>
+      <trans-unit id="MSC.property_notifier_list_delete">
+        <source>Your search was successfully deleted</source>
+        <target>Ihre Suche wurde erfolgreich gelöscht</target>
+      </trans-unit>
+      <trans-unit id="ERR.property_notifier_list_delete_not_authorized">
+        <source>You do not have permission to delete this search</source>
+        <target>Sie haben keine Berechtigung diese Suche zu löschen</target>
+      </trans-unit>
+      <trans-unit id="ERR.property_notifier_list_no_module">
+        <source>The search has already been deleted</source>
+        <target>Die Suche wurde bereits gelöscht</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

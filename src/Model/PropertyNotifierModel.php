@@ -2,6 +2,7 @@
 
 namespace ContaoEstateManager\PropertyNotifier\Model;
 
+use Contao\Database;
 use Contao\Model;
 
 /**
@@ -54,6 +55,17 @@ class PropertyNotifierModel extends Model
             [$member->id, $member->email],
             $arrOptions
         );
+    }
+
+    /**
+     * Delete record by id
+     */
+    public static function deleteById($id)
+    {
+        $t = static::$strTable;
+
+        Database::getInstance()->prepare("DELETE FROM $t WHERE id=?")
+            ->execute($id);
     }
 
     /**

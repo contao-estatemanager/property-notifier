@@ -19,6 +19,7 @@ use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController
 use Contao\User;
 use ContaoEstateManager\PropertyNotifier\Model\PropertyNotifierModel;
 use ContaoEstateManager\RealEstateTypeModel;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,6 +56,11 @@ class PropertyNotifierListController extends AbstractFrontendModuleController
     protected ?User $user;
 
     /**
+     * Flashbag
+     */
+    protected ?FlashBagInterface $flashBag;
+
+    /**
      * Create Frontend Module
      */
     public function __construct(TranslatorInterface $translator)
@@ -77,8 +83,20 @@ class PropertyNotifierListController extends AbstractFrontendModuleController
         // Get user instance
         $this->user = Controller::getContainer()->get('security.helper')->getUser();
 
+        // Get flash bag
+        $this->flashBag = $request->getSession()->getFlashBag();
+
+        // Check whether a record is to be deleted
+        $this->deleteAction();
+
         // Set template vars
         $template->list = $this->list();
+
+        if ($request->getSession()->isStarted() && $this->flashBag->has(self::TYPE))
+        {
+            $arrMessages = $this->flashBag->get(self::TYPE);
+            $template->message = $arrMessages[0];
+        }
 
         return new Response($template->parse());
     }
@@ -90,8 +108,11 @@ class PropertyNotifierListController extends AbstractFrontendModuleController
     {
         if(!$objRecords = PropertyNotifierModel::findByMember($this->user))
         {
+            $this->flashBag->set(self::TYPE, $this->translator->trans('MSC.property_notifier_list_empty', [], 'contao_default'));
             return [];
         }
+
+        global $objPage;
 
         $records = [];
         $editPage = $this->model->jumpTo ? $this->model->getRelated('jumpTo') : null;
@@ -103,8 +124,11 @@ class PropertyNotifierListController extends AbstractFrontendModuleController
 
             $template->intervalLabel = $this->translator->trans('tl_property_notifier.intervalLabel', [], 'contao_default');
             $template->editLabel = $this->translator->trans('tl_property_notifier.editLabel', [], 'contao_default');
-            $template->deleteLabel = $this->translator->trans('tl_property_notifier.deleteLabel', [], 'contao_default');
             $template->createdAtLabel = $this->translator->trans('tl_property_notifier.createdAtLabel', [], 'contao_default');
+
+            $template->deleteLabel = $this->translator->trans('tl_property_notifier.deleteLabel', [], 'contao_default');
+            $template->deleteSafetyQuestion = $this->translator->trans('tl_property_notifier.deleteSafetyQuestion', [], 'contao_default');
+            $template->deleteLink = $objPage->getAbsoluteUrl() . '?act=delete&notifierId=' . $record->id;
 
             $template->humanReadableDate = date(Config::get('datimFormat'), (int) $record->tstamp);
 
@@ -182,6 +206,39 @@ class PropertyNotifierListController extends AbstractFrontendModuleController
         }
 
         return $records;
+    }
+
+    /**
+     * Check whether a data record is to be deleted
+     */
+    protected function deleteAction()
+    {
+        global $objPage;
+
+        if('delete' === $this->request->get('act') && $id = $this->request->get('notifierId'))
+        {
+            if($objNotifier = PropertyNotifierModel::findById($id))
+            {
+                if(PropertyNotifierModel::isOwnerOfRecord($this->user, $objNotifier))
+                {
+                    PropertyNotifierModel::deleteById($id);
+
+                    $this->flashBag->set(self::TYPE, $this->translator->trans('MSC.property_notifier_list_delete', [], 'contao_default'));
+
+                    // Reload
+                    throw new RedirectResponseException($objPage->getAbsoluteUrl(), 303);
+                }
+                else
+                {
+                    $this->flashBag->set(self::TYPE, $this->translator->trans('ERR.property_notifier_list_delete_not_authorized', [], 'contao_default'));
+                }
+            }
+            else
+            {
+                // Add error message
+                $this->flashBag->set(self::TYPE, $this->translator->trans('ERR.property_notifier_list_no_module', [], 'contao_default'));
+            }
+        }
     }
 
     /**
