@@ -1,0 +1,50 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_real_estate_config.php" source-language="en" target-language="de">
+    <body>
+      <trans-unit id="tl_real_estate_config.property_notifier_legend">
+        <source>Property Notifier</source>
+        <target>Objektbenachrichtigungen</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierRealEstatePage.0">
+        <source>Real Estate Page</source>
+        <target>Immobilien-Seite</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierRealEstatePage.1">
+        <source>Define here the page to which the prospect will be directed if he clicks on the link to view his search via the email.</source>
+        <target>Definieren Sie hier die Seite, auf die der Interessent geleitet wird, sofern er über die E-Mail auf den Link zum Anzeigen seiner Suche klickt.</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierExposePage.0">
+        <source>Exposé page</source>
+        <target>Exposé-Seite</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierExposePage.1">
+        <source>Define here the page to which the prospect will be redirected if he clicks on the link to an object via the email he received.</source>
+        <target>Definieren Sie hier die Seite, auf die der Interessent geleitet wird, sofern er über die erhaltene E-Mail auf den Link zu einem Objekt klickt.</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierDeletePage.0">
+        <source>Delete notifications page</source>
+        <target>Benachrichtigungen löschen Seite</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierDeletePage.1">
+        <source>Define here the page where the module for deleting notifications is located.</source>
+        <target>Definieren Sie hier die Seite, in der sich das Modul zum löschen der Benachrichtigungen befindet.</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierMaxCount.0">
+        <source>Max. number of properties</source>
+        <target>Max. Anzahl an Objekten</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierMaxCount.1">
+        <source>Define here the maximum number of objects that will be sent to interested parties by e-mail. The smaller the value, the less performance is required when determining the data records in the cronjob.</source>
+        <target>Definieren Sie hier die maximale Anzahl der Objekte, welche Interessenten per E-Mail gesendet werden. Je kleiner der Wert, desto weniger Performance wird beim Ermitteln der Datensätze im Cronjob benötigt.</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierPoorMan.0">
+        <source>Disable Poor Man Cronjob</source>
+        <target>Poor-Man-Cronjob deaktivieren</target>
+      </trans-unit>
+      <trans-unit id="tl_real_estate_config.propertyNotifierPoorMan.1">
+        <source>Disables the poor-man cronjob and allows you to set up a server-side cronjob.</source>
+        <target>Deaktiviert den Poor-Man-Cronjob und ermöglicht die Einrichtung eines serverseitigen Cronjobs.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -30,6 +30,15 @@
         <source>The search has already been deleted</source>
         <target>Die Suche wurde bereits gelöscht</target>
       </trans-unit>
+
+      <trans-unit id="MSC.property_notifier_delete">
+        <source>Thank you, your search has been successfully deleted!</source>
+        <target>Vielen Dank, Ihre Suche wurde erfolgreich gelöscht!</target>
+      </trans-unit>
+      <trans-unit id="ERR.property_notifier_delete_no_module">
+        <source>The search has already been deleted</source>
+        <target>Die Suche wurde bereits gelöscht</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

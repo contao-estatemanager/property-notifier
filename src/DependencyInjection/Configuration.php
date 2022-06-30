@@ -13,6 +13,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('salt')
+                    ->info('Custom salted key for generating the hash within the delete links')
+                ->end()
                 ->arrayNode('intervals')
                     ->prototype('array')
                         ->children()

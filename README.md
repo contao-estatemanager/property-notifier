@@ -1,6 +1,10 @@
 # Property Notifier Extension for Contao EstateManager
 The Property Notifier extension allows to save search requests based on different criteria and to be informed about new properties by e-mail.
 
+## ToDos:
+- Translations
+- Expression Check: ObjType
+
 # License
 Copyright © 2022 Contao EstateManager
 

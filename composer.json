@@ -14,10 +14,13 @@
   ],
   "require":{
     "php":"^7.4 || ^8.0",
+    "ext-openssl": "*",
     "contao/core-bundle":"^4.13",
     "rlanvin/php-rrule":"^v2.3",
+    "symfony/expression-language":"^v6.0 || ^v5.4",
     "codefog/contao-haste":"^4.25",
-    "contao-estatemanager/core": "^1.1"
+    "contao-estatemanager/core": "^1.1",
+    "terminal42/notification_center": "^1.6"
   },
   "require-dev": {
     "contao/manager-plugin": "^2.0",

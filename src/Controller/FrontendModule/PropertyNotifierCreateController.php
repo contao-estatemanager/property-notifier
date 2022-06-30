@@ -16,17 +16,20 @@ use Contao\CoreBundle\ServiceAnnotation\FrontendModule;
 use Contao\CoreBundle\Controller\FrontendModule\AbstractFrontendModuleController;
 use Contao\User;
 use ContaoEstateManager\PropertyNotifier\Model\PropertyNotifierModel;
+use ContaoEstateManager\PropertyNotifier\NotificationTypes;
+use ContaoEstateManager\PropertyNotifier\PropertyNotifier;
 use ContaoEstateManager\SessionManager;
 use Haste\Form\Form;
+use NotificationCenter\Model\Notification;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @FrontendModule(type=PropertyNotifierCreatorController::TYPE, category="estatemanager")
+ * @FrontendModule(type=PropertyNotifierCreateController::TYPE, category="estatemanager")
  */
-class PropertyNotifierCreatorController extends AbstractFrontendModuleController
+class PropertyNotifierCreateController extends AbstractFrontendModuleController
 {
     /**
      * Frontend Module Type
@@ -64,6 +67,11 @@ class PropertyNotifierCreatorController extends AbstractFrontendModuleController
     protected ?PropertyNotifierModel $notifier;
 
     /**
+     * Property Notifier
+     */
+    protected PropertyNotifier $propertyNotifier;
+
+    /**
      * Data
      */
     protected $data;
@@ -71,12 +79,13 @@ class PropertyNotifierCreatorController extends AbstractFrontendModuleController
     /**
      * Create Frontend Module
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(PropertyNotifier $propertyNotifier, TranslatorInterface $translator)
     {
         // Load language file
         Controller::loadLanguageFile('tl_property_notifier');
 
         $this->translator = $translator;
+        $this->propertyNotifier = $propertyNotifier;
     }
 
     /**
@@ -153,7 +162,9 @@ class PropertyNotifierCreatorController extends AbstractFrontendModuleController
         if(!$this->user)
         {
             $this->form->addFormField('email', [
-                'label'         => ['!E-Mail'],
+                'label'         => [
+                    $this->translator->trans('tl_property_notifier.email', [], 'contao_default')
+                ],
                 'inputType'     => 'text',
                 'eval'          => [
                     'mandatory' => true,
@@ -229,7 +240,7 @@ class PropertyNotifierCreatorController extends AbstractFrontendModuleController
             $notifier->member = $this->user->id ?? 0;
 
             // Create hash to check if an identical entry already exists
-            $hash = hash('sha256', $notifier->properties);
+            $hash = hash('sha256', $notifier->properties . ($notifier->email ?: $notifier->member));
 
             // Check if the hash already exists, and we are not in edit mode
             if(!$this->notifier && PropertyNotifierModel::findByMemberAndHash($this->user, $hash))
@@ -244,6 +255,17 @@ class PropertyNotifierCreatorController extends AbstractFrontendModuleController
 
             // Save notifier object
             $notifier->save();
+
+            // Send Mail
+            $objNotificationCollection = Notification::findByType(NotificationTypes::SAVED);
+
+            if (null !== $objNotificationCollection)
+            {
+                foreach ($objNotificationCollection as $objNotification)
+                {
+                    $objNotification->send($this->propertyNotifier->getSimpleToken($notifier));
+                }
+            }
 
             // Success message if we are in edit mode
             if($this->notifier)

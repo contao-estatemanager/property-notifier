@@ -19,7 +19,7 @@ use Contao\Model;
  *
  * @method static PropertyNotifierModel|null findById($id, array $opt=array())
  * @method static PropertyNotifierModel|null findOneBy($col, $val, array $opt=array())
- * @method static PropertyNotifierModel|null findOneByHash($col, $val, array $opt=array())
+ * @method static PropertyNotifierModel|null findOneByHash($val, array $opt=array())
  * @method static PropertyNotifierModel|null findOneByTstamp($val, array $opt=array())
  *
  * @method static \Model\Collection|PropertyNotifierModel[]|PropertyNotifierModel|null findByTstamp($val, array $opt=array())
@@ -41,6 +41,9 @@ class PropertyNotifierModel extends Model
      */
     protected static $strTable = 'tl_property_notifier';
 
+    /**
+     * Find records by member
+     */
     public static function findByMember($member, array $arrOptions = [])
     {
         if(null === $member)
@@ -87,6 +90,15 @@ class PropertyNotifierModel extends Model
      */
     public static function isOwnerOfRecord($member, $record): bool
     {
+        if(is_numeric($member))
+        {
+            $id = $member;
+
+            $member = new \stdClass();
+            $member->id = $id;
+            $member->email = '';
+        }
+
         // Check if the record belongs to the member
         if($member ?? null && (($member->id === $record->member) || ($record->email && ($member->email === $record->email))))
         {

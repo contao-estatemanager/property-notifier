@@ -17,6 +17,14 @@
         <source>Lists all searches associated with the member, which were created using the "Save Search" module.</source>
         <target>Listet alle dem Mitglied zugehörigen Suchen auf, welche über das Modul "Suche speichern" erstellt wurden.</target>
       </trans-unit>
+      <trans-unit id="FMD.property_notifier_delete.0">
+        <source>Delete saved searches</source>
+        <target>Gespeicherte Suchen löschen</target>
+      </trans-unit>
+      <trans-unit id="FMD.property_notifier_delete.1">
+        <source>This module is used to automatically delete saved searches of a visitor from an email. This module should be located on the page defined as the delete page in the settings.</source>
+        <target>Diese Modul dient zum automatischen Löschen von gespeicherten Suchen eines Besuchers aus einer E-Mail heraus. Dieses Modul sollte sich auf der Seite befinden, welche als Lösch-Seite in den Einstellungen definiert wurde.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -38,6 +38,11 @@ class EstateManagerPropertyNotifierExtension extends Extension
             ]
         ];
 
+        if(empty($config['salt']))
+        {
+            $config['salt'] = '&#78;&#79;&#84;&#73;&#70;&#73;&#69;&#82;';
+        }
+
         if(!empty($config['intervals']))
         {
             $config['intervals'] = array_merge_recursive($intervals, $config['intervals']);
@@ -47,6 +52,7 @@ class EstateManagerPropertyNotifierExtension extends Extension
             $config['intervals'] = $intervals;
         }
 
+        $container->setParameter('property_notifier.salt', $config['salt']);
         $container->setParameter('property_notifier.intervals', $config['intervals']);
     }
 }
