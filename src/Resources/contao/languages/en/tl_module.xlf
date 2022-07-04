@@ -1,29 +1,23 @@
 <?xml version="1.0" ?><xliff version="1.1">
-  <file datatype="php" original="src/Resources/contao/languages/en/tl_module.php" source-language="en" target-language="de">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_module.php" source-language="en">
     <body>
       <trans-unit id="tl_module.pnText.0">
         <source>Text</source>
-        <target>Text</target>
       </trans-unit>
       <trans-unit id="tl_module.pnText.1">
         <source>Enter a text here, which will be output above the form.</source>
-        <target>Geben Sie hier einen Text ein, welcher oberhalb des Formulars ausgegeben wird.</target>
       </trans-unit>
       <trans-unit id="tl_module.excludeHiddenFields.0">
         <source>Turn off hidden fields</source>
-        <target>Versteckte Felder ausschalten</target>
       </trans-unit>
       <trans-unit id="tl_module.excludeHiddenFields.1">
         <source>Prevents automatic output of hidden fields. Please note that in this case required fields must be supplied manually via an attached form.</source>
-        <target>Verhindert die automatische Ausgabe von versteckten Feldern. Bitte beachten Sie, dass in diesem Fall von Contao benötigte Felder manuell über ein angehängtes Formular mitgeliefert werden müssen.</target>
       </trans-unit>
       <trans-unit id="tl_module.addForm.0">
         <source>Attach form</source>
-        <target>Formular anhängen</target>
       </trans-unit>
       <trans-unit id="tl_module.addForm.1">
         <source>Select a form that can be provided by the form generator to further influence the search parameters. Please note that your own additional development, which can be integrated via the available hooks, may be required.</source>
-        <target>Wählen Sie ein Formular, welches durch den Formulargenerator bereitgestellt werden kann, um weiteren Einfluss auf die Suchparameter nehmen zu können. Bitte beachten Sie, dass ggf. eine eigene Zusatzentwicklung, welche über die zur Verfügung stehenden Hooks integriert werden kann, benötigt wird.</target>
       </trans-unit>
     </body>
   </file>

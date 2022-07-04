@@ -1,0 +1,3 @@
+property_notifier_cron:
+    resource: ../../Cron
+    type: annotation

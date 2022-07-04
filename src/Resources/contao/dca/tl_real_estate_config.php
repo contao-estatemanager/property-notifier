@@ -20,7 +20,7 @@ if(AddonManager::valid())
         'exclude'                 => true,
         'inputType'               => 'pageTree',
         'foreignKey'              => 'tl_page.title',
-        'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'w50'),
+        'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'w50 clr'),
         'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
     ];
 
@@ -28,7 +28,7 @@ if(AddonManager::valid())
         'exclude'                 => true,
         'inputType'               => 'pageTree',
         'foreignKey'              => 'tl_page.title',
-        'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'w50', 'mandatory'=>true),
+        'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'w50 clr', 'mandatory'=>true),
         'relation'                => array('type'=>'hasOne', 'load'=>'lazy')
     ];
 

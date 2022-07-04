@@ -1,29 +1,23 @@
 <?xml version="1.0" ?><xliff version="1.1">
-  <file datatype="php" original="src/Resources/contao/languages/en/modules.php" source-language="en" target-language="de">
+  <file datatype="php" original="src/Resources/contao/languages/en/modules.php" source-language="en">
     <body>
       <trans-unit id="FMD.property_notifier_create.0">
         <source>Save search</source>
-        <target>Suche speichern</target>
       </trans-unit>
       <trans-unit id="FMD.property_notifier_create.1">
         <source>Allows to save the current filtering (real estate filter) or by setting a custom form to be notified about new properties.</source>
-        <target>Ermöglicht das Speichern der aktuellen Filterung (Immobilien-Filter) oder über Vorgabe eines eigenen Formulars um anhand dessen über neue Immobilien benachrichtigt zu werden.</target>
       </trans-unit>
       <trans-unit id="FMD.property_notifier_list.0">
         <source>Saved searches</source>
-        <target>Gespeicherte Suchen</target>
       </trans-unit>
       <trans-unit id="FMD.property_notifier_list.1">
         <source>Lists all searches associated with the member, which were created using the "Save Search" module.</source>
-        <target>Listet alle dem Mitglied zugehörigen Suchen auf, welche über das Modul "Suche speichern" erstellt wurden.</target>
       </trans-unit>
       <trans-unit id="FMD.property_notifier_delete.0">
         <source>Delete saved searches</source>
-        <target>Gespeicherte Suchen löschen</target>
       </trans-unit>
       <trans-unit id="FMD.property_notifier_delete.1">
         <source>This module is used to delete saved searches from an email. This module must be located on the page defined as the "Delete saved search" page in the property settings.</source>
-        <target>Dieses Modul dient zum Löschen von gespeicherten Suchen aus einer E-Mail heraus. Dieses Modul muss sich auf der Seite befinden, welche als Seite für "Gespeicherte Suche löschen" in den Immobilien-Einstellungen definiert wurde.</target>
       </trans-unit>
     </body>
   </file>

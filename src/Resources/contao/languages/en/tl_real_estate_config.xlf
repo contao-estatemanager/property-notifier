@@ -1,49 +1,38 @@
 <?xml version="1.0" ?><xliff version="1.1">
-  <file datatype="php" original="src/Resources/contao/languages/en/tl_real_estate_config.php" source-language="en" target-language="de">
+  <file datatype="php" original="src/Resources/contao/languages/en/tl_real_estate_config.php" source-language="en">
     <body>
       <trans-unit id="tl_real_estate_config.property_notifier_legend">
         <source>Property Notifier</source>
-        <target>Objektbenachrichtigungen</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierRealEstatePage.0">
         <source>Real Estate List</source>
-        <target>Immobilien-Liste</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierRealEstatePage.1">
         <source>The URL of this page can be read using the simple token ##notifier_list_link## and is intended to redirect to a page with real estate.</source>
-        <target>Die URL dieser Seite kann über den Simple-Token ##notifier_list_link## ausgelesen werden und ist dafür vorgesehen, auf eine Seite mit Immobilien zu leiten.</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierExposePage.0">
         <source>Real estate exposé</source>
-        <target>Immobilien-Exposé</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierExposePage.1">
         <source>Enter a page here that contains an Exposé module to be able to call up found objects directly from the e-mail. </source>
-        <target>Definieren Sie hier eine Seite, welche ein Exposé-Modul enthält, um gefundene Objekte direkt aus der E-Mail heraus aufrufen zu können.</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierDeletePage.0">
         <source>Delete saved search</source>
-        <target>Gespeicherte Suche löschen</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierDeletePage.1">
         <source>Define here the page where the module for deleting notifications (Delete saved searches) is located. Please note that this page should never be protected. A saved search should be able to be deleted without logging in.</source>
-        <target>Definieren Sie hier die Seite, in der sich das Modul zum löschen der Benachrichtigungen (Gespeicherte Suchen löschen) befindet. Bitte beachten Sie, dass diese Seite niemals geschützt werden sollte. Eine gespeicherte Suche, sollte auch ohne sich einzuloggen gelöscht werden können.</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierMaxCount.0">
         <source>Max. number of properties</source>
-        <target>Max. Anzahl an Objekten</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierMaxCount.1">
         <source>Define here the maximum number of objects that will be sent to interested parties by e-mail.</source>
-        <target>Definieren Sie hier die maximale Anzahl der Objekte, welche Interessenten per E-Mail gesendet werden.</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierPoorMan.0">
         <source>Disable Poor Man Cronjob</source>
-        <target>Poor-Man-Cronjob deaktivieren</target>
       </trans-unit>
       <trans-unit id="tl_real_estate_config.propertyNotifierPoorMan.1">
         <source>Disables the poor-man cronjob and enables the setup of a server-side cronjob which can be called via "/property_notifier/cron".</source>
-        <target>Deaktiviert den Poor-Man-Cronjob und ermöglicht die Einrichtung eines serverseitigen Cronjobs welcher über "/property_notifier/cron" aufgerufen werden kann.</target>
       </trans-unit>
     </body>
   </file>

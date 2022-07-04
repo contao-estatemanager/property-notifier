@@ -3,19 +3,35 @@
 namespace ContaoEstateManager\PropertyNotifier\Cron;
 
 use Contao\Config;
+use Contao\CoreBundle\Framework\ContaoFramework;
 use ContaoEstateManager\PropertyNotifier\NotificationTypes;
 use ContaoEstateManager\PropertyNotifier\PropertyNotifier;
 use NotificationCenter\Model\Notification;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class PropertyNotifierCron
 {
     const LAST_RUN_KEY = 'property_notifier_cron_last_run';
 
     private PropertyNotifier $propertyNotifier;
+    private ContaoFramework $framework;
 
-    public function __construct(PropertyNotifier $propertyNotifier)
+    public function __construct(PropertyNotifier $propertyNotifier, ContaoFramework $framework)
     {
         $this->propertyNotifier = $propertyNotifier;
+        $this->framework = $framework;
+    }
+
+    /**
+     * @Route("/property_notifier/cron", name="property_notifier_cron")
+     */
+    public function run(): Response
+    {
+        $this->framework->initialize();
+        $this->runPoorMan();
+
+        return new Response('Cronjob was executed successfully');
     }
 
     public function runPoorMan()

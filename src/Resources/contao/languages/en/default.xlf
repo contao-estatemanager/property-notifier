@@ -1,0 +1,35 @@
+<?xml version="1.0" ?><xliff version="1.1">
+  <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en">
+    <body>
+      <trans-unit id="ERR.property_notifier_create">
+        <source>You have already saved a search with these parameters</source>
+      </trans-unit>
+      <trans-unit id="MSC.property_notifier_create">
+        <source>The search was saved successfully</source>
+      </trans-unit>
+      <trans-unit id="MSC.property_notifier_edit">
+        <source>The search was successfully processed</source>
+      </trans-unit>
+
+      <trans-unit id="MSC.property_notifier_list_empty">
+        <source>You have not saved any searches yet.</source>
+      </trans-unit>
+      <trans-unit id="MSC.property_notifier_list_delete">
+        <source>Your search was successfully deleted</source>
+      </trans-unit>
+      <trans-unit id="ERR.property_notifier_list_delete_not_authorized">
+        <source>You do not have permission to delete this search</source>
+      </trans-unit>
+      <trans-unit id="ERR.property_notifier_list_no_module">
+        <source>The search has already been deleted</source>
+      </trans-unit>
+
+      <trans-unit id="MSC.property_notifier_delete">
+        <source>Thank you, your search has been successfully deleted!</source>
+      </trans-unit>
+      <trans-unit id="ERR.property_notifier_delete_no_module">
+        <source>The search has already been deleted</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

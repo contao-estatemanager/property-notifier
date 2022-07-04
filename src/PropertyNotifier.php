@@ -100,6 +100,7 @@ class PropertyNotifier
     public function match($objRealEstates, $objNotifier): ?array
     {
         $realEstates = null;
+        $notifierObjType = null;
         $properties =  StringUtil::deserialize($objNotifier->properties, true);
 
         // Create expression language object and necessary methods
@@ -108,17 +109,44 @@ class PropertyNotifier
         $expressionLanguage->addFunction(ExpressionFunction::fromPhp('strlen'));
         $expressionLanguage->addFunction(ExpressionFunction::fromPhp('substr_compare'));
 
+        // Create parameter bag
+        $notifierProperties = new ParameterBag($properties);
+
+        // Get the object type if one was selected
+        if($objTypeId = $notifierProperties->get(Filter::PROPERTY_TYPE_KEY))
+        {
+            /** @var RealEstateTypeModel $realEstateType */
+            $notifierObjType = RealEstateType::getInstance()->getTypeById($objTypeId);
+        }
+
         // HOOK: add custom expression language logic
         if (isset($GLOBALS['CEM_HOOKS']['beforeMatchPropertyNotifier']) && \is_array($GLOBALS['CEM_HOOKS']['beforeMatchPropertyNotifier']))
         {
             foreach ($GLOBALS['CEM_HOOKS']['beforeMatchPropertyNotifier'] as $callback)
             {
-                System::importStatic($callback[0])->{$callback[1]}($properties, $expressionLanguage);
+                System::importStatic($callback[0])->{$callback[1]}($notifierProperties, $notifierObjType, $expressionLanguage);
             }
         }
 
+        // Max amount of properties
         $max  = Config::get('propertyNotifierMaxCount') ?: null;
         $count = 0;
+
+        // Generating fragments for the compliance check
+        $fragment = new PropertyFragmentBuilder($notifierProperties, new ExpressionPropertyFragmentProvider());
+        $fragment->setObjType($notifierObjType);
+        $fragment->applyMultiple([
+            PropertyFragmentBuilder::FRAGMENT_BASIC,
+            PropertyFragmentBuilder::FRAGMENT_COUNTRY,
+            PropertyFragmentBuilder::FRAGMENT_LANGUAGE,
+            PropertyFragmentBuilder::FRAGMENT_LOCATION,
+            PropertyFragmentBuilder::FRAGMENT_PRICE,
+            PropertyFragmentBuilder::FRAGMENT_AREA,
+            PropertyFragmentBuilder::FRAGMENT_PERIOD,
+            PropertyFragmentBuilder::FRAGMENT_ROOM
+        ]);
+
+        $expressionRows = $fragment->generate();
 
         // Check if the notifier data match with a real estate
         foreach ($objRealEstates as $objRealEstate)
@@ -126,33 +154,12 @@ class PropertyNotifier
             /** @var RealEstateTypeModel $realEstateType */
             $objType = RealEstateType::getInstance()->getTypeByRealEstate($objRealEstate);
 
+            // Skip properties that cannot be assigned to a unique object type
             if(null === $objType)
             {
                 continue;
             }
 
-            // Create parameter bag
-            $notifierProperties = new ParameterBag($properties);
-
-            // Convert notifier data to the same format as a real estate
-            $this->convertNotifierProperties($notifierProperties, $objType);
-
-            $fragment = new PropertyFragmentBuilder($notifierProperties, new ExpressionPropertyFragmentProvider());
-            $fragment->setObjType($objType);
-            $fragment->applyMultiple([
-                PropertyFragmentBuilder::FRAGMENT_BASIC,
-                PropertyFragmentBuilder::FRAGMENT_COUNTRY,
-                PropertyFragmentBuilder::FRAGMENT_LANGUAGE,
-                PropertyFragmentBuilder::FRAGMENT_LOCATION,
-                PropertyFragmentBuilder::FRAGMENT_PRICE,
-                PropertyFragmentBuilder::FRAGMENT_AREA,
-                PropertyFragmentBuilder::FRAGMENT_PERIOD,
-                PropertyFragmentBuilder::FRAGMENT_ROOM
-            ]);
-
-            $expressionRows = $fragment->generate();
-
-            // ToDo: Check ObjTypes (Büro & Praxis) - Something is not working here
             foreach ($expressionRows as $row)
             {
                 if(!$expressionLanguage->evaluate($row, $objRealEstate->row()))
@@ -171,44 +178,6 @@ class PropertyNotifier
         }
 
         return $realEstates;
-    }
-
-    /**
-     * Convert keys for passing notifier data to the PropertyFragmentBuilder
-     */
-    public function convertNotifierProperties(ParameterBag $notifierData, RealEstateTypeModel $objType): void
-    {
-        // Check if an explicit marketing type exists
-        if($marketingType = $notifierData->get(Filter::MARKETING_TYPE_KEY))
-        {
-            switch ($marketingType)
-            {
-                case Filter::MARKETING_TYPE_BUY:
-                    $notifierData->set('vermarktungsartKauf', 1);
-                    $notifierData->set('vermarktungsartErbpacht', 1);
-                    break;
-
-                case Filter::MARKETING_TYPE_RENT:
-                    $notifierData->set('vermarktungsartMietePacht', 1);
-                    $notifierData->set('vermarktungsartLeasing', 1);
-                    break;
-            }
-        }
-
-        // Check if a location exists
-        if($location = $notifierData->get('location'))
-        {
-            $notifierData->set('ort', $location);
-        }
-
-        // HOOK: add custom logic
-        if (isset($GLOBALS['CEM_HOOKS']['matchConvertPropertyNotifierData']) && \is_array($GLOBALS['CEM_HOOKS']['matchConvertPropertyNotifierData']))
-        {
-            foreach ($GLOBALS['CEM_HOOKS']['matchConvertPropertyNotifierData'] as $callback)
-            {
-                System::importStatic($callback[0])->{$callback[1]}($notifierData, $objType);
-            }
-        }
     }
 
     /**
@@ -357,7 +326,7 @@ class PropertyNotifier
         {
             foreach ($GLOBALS['CEM_HOOKS']['propertyNotifierSimpleToken'] as $callback)
             {
-                System::importStatic($callback[0])->{$callback[1]}($token);
+                System::importStatic($callback[0])->{$callback[1]}($token, $objNotifier, $arrRealEstates);
             }
         }
 
